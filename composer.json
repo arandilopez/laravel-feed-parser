@@ -1,0 +1,28 @@
+{
+    "name": "arandilopez/laravel-feed-parser",
+    "description": "Laravel and Lumen feed parser",
+    "require": {
+        "simplepie/simplepie": "^1.3",
+        "illuminate/support": "^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.6.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arandi Lopez",
+            "email": "arandilopez.93@gmail.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "ArandiLopez\\FeedParser\\": "src/"
+      }
+    },
+    "autoload-dev": {
+      "classmap": [
+        "tests/"
+      ]
+    }
+}

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Facade;
 
 class FeedParserFacade extends Facade {
-  protected static function getFacadeAccessor() {
-    return 'FeedParser';
-  }
+    protected static function getFacadeAccessor() {
+        return 'FeedParser';
+    }
 }

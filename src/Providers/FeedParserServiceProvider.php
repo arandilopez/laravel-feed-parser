@@ -4,21 +4,21 @@ use Illuminate\Support\ServiceProvider;
 
 class FeedParserServiceProvider extends ServiceProvider {
 
-  protected $defer = true;
+    protected $defer = true;
 
-  public function boot()
-  {
+    public function boot()
+    {
 
-  }
+    }
 
-  public function register()
-  {
+    public function register()
+    {
 
-  }
+    }
 
-  public function provides()
-  {
-    return [];
-  }
+    public function provides()
+    {
+        return [];
+    }
 
 }

@@ -1,6 +1,6 @@
-<?php namespace ArandiLopez\FeedParser\Factories;
+<?php namespace ArandiLopez\Feed\Factories;
 
-use ArandiLopez\FeedParser\Adapters\SimplePieAdapter as FeedAdapter;
+use ArandiLopez\Feed\Adapters\SimplePieAdapter;
 
 class FeedFactory {
 
@@ -12,9 +12,9 @@ class FeedFactory {
         $this->config = $config;
     }
 
-    public function fetch($url)
+    public function make($url)
     {
-        $this->feed = new FeedAdapter();
+        $this->feed = new SimplePieAdapter();
         $this->feed->loadConfig($this->config);
         $this->feed->setFeedUrl($url);
         $this->feed->init();

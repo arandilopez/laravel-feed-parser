@@ -1,7 +1,9 @@
-<?php namespace ArandiLopez\FeedParser\Adapters;
+<?php namespace ArandiLopez\Feed\Adapters;
 
 use SimplePie;
 use Illuminate\Support\Str;
+use ArandiLopez\Feed\Adapters\SimplePieItemAdapter as Item;
+use ArandiLopez\Feed\Adapters\SimplePieAuthorAdapter as Author;
 
 class SimplePieAdapter {
 
@@ -24,20 +26,29 @@ class SimplePieAdapter {
 
     public function __get($attribute)
     {
+        if( $attribute === 'items' ) {
+            return $this->getItems();
+        }
+
+        if ( $attribute === 'author' ) {
+            return $this->getAuthor();
+        }
+
+        if ( $attribute === 'authors' ) {
+            return $this->getAuthors();
+        }
         $attr = Str::snake($attribute);
-        return $this->feeder->get_$attr();
+        $method = 'get_'.$attr;
+        return $this->feeder->$method();
     }
 
     public function __set($attribute, $value)
     {
         $attr = Str::snake($attribute);
-        $this->feeder->set_$attr($value);
+        $method = 'set_'.$attr;
+        $this->feeder->$method($value);
     }
 
-    // public function getTitle()
-    // {
-    //     return $this->feeder->get_title();
-    // }
     //
     // public function getCategory()
     // {
@@ -49,25 +60,29 @@ class SimplePieAdapter {
     //     return $this->feeder->get_categories();
     // }
     //
-    // public function getAuthor()
-    // {
-    //     return $this->feeder->get_author();
-    // }
+    public function getAuthor()
+    {
+        return new Author( $this->feeder->get_author() );
+    }
     //
-    // public function getAuthors()
-    // {
-    //     return $this->feeder->get_authors();
-    // }
-    //
-    // public function getPermalink()
-    // {
-    //     return $this->feeder->get_permalink();
-    // }
-    //
-    // public function getDescription()
-    // {
-    //     return $this->feeder->get_description();
-    // }
+    public function getAuthors()
+    {
+        $authors = [];
+        foreach ($this->feeder->get_authors() as $author) {
+            array_push($authors, new Author($author));
+        }
+
+        return $authors;
+    }
+
+    public function getItems()
+    {
+        $items = [];
+        foreach ($this->feeder->get_items() as $item) {
+            array_push($items, new Item($item));
+        }
+        return $items;
+    }
 
     public function setFeedUrl($url)
     {

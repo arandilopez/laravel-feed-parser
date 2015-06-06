@@ -31,5 +31,5 @@
     "minimum-stability": "stable",
     "suggest": {
         "vlucas/phpdotenv": "Required to use .env files (~1.0)."
-    },
+    }
 }

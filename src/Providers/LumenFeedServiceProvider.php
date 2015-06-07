@@ -1,4 +1,4 @@
-<?php namespace ArandiLopez\Feed\Providers\LumenFeedServiceProvider;
+<?php namespace ArandiLopez\Feed\Providers;
 
 use ArandiLopez\Feed\Factories\FeedFactory;
 use ArandiLopez\Feed\Providers\FeedServiceProvider;

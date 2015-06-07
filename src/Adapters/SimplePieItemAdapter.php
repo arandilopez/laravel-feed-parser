@@ -1,7 +1,7 @@
 <?php namespace ArandiLopez\Feed\Adapters;
 
 use Illuminate\Support\Str;
-use ArandiLopez\Feed\Adapters\SimplePieAuthorAdapter;
+use ArandiLopez\Feed\Adapters\SimplePieAuthorAdapter as Author;
 
 use JsonSerializable;
 use ArrayAccess;

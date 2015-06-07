@@ -1,6 +1,6 @@
 {
     "name": "arandilopez/laravel-feed-parser",
-    "description": "Laravel and Lumen feed parser",
+    "description": "Laravel and Lumen rss feed parser",
     "require": {
         "php": ">=5.4.0",
         "simplepie/simplepie": "^1.3",
@@ -28,5 +28,8 @@
         "tests/"
       ]
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "suggest": {
+        "vlucas/phpdotenv": "Required to use .env files (~1.0)."
+    }
 }

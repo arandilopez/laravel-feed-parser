@@ -16,10 +16,10 @@ return [
     /*
         Lifetime of cache
     */
-    'cache.life'     => 3600,
+    'cache.life'     => env(FEED_CACHE_LIFE, 3600),
 
     /*
         Wheter cache is enable in your context
     */
-    'cache.enabled'  => true,
+    'cache.enabled'  => env(FEED_CACHE_ENABLED, true),
 ];

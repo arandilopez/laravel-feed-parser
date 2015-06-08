@@ -17,7 +17,6 @@ class FeedServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->registerFeedFactory();
-        $this->app->alias('feed', 'ArandiLopez\Feed\Factories\FeedFactory');
     }
 
     protected function registerFeedFactory()
@@ -29,6 +28,7 @@ class FeedServiceProvider extends ServiceProvider {
             }
             return new FeedFactory($config);
         });
+        $this->app->alias('feed', 'ArandiLopez\Feed\Factories\FeedFactory');
     }
 
     public function provides()

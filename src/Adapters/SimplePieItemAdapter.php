@@ -29,7 +29,7 @@ class SimplePieItemAdapter implements JsonSerializable, Jsonable, ArrayAccess, A
         }
 
         if ( $attribute === 'authors' ) {
-            # code...
+            return $this->getAuthors();
         }
         $attr = Str::snake($attribute);
         $method = 'get_'.$attr;
@@ -45,7 +45,7 @@ class SimplePieItemAdapter implements JsonSerializable, Jsonable, ArrayAccess, A
     public function getAuthors()
     {
         $authors = [];
-        foreach ($this->item->get_authors as $author) {
+        foreach ($this->item->get_authors() as $author) {
             array_push($authors, new Author($author));
         }
         return $authors;

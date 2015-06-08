@@ -9,11 +9,12 @@ class LumenFeedServiceProvider extends FeedServiceProvider {
     public function registerFeedFactory()
     {
         $config = include __DIR__ . '/../config/feed.php';
-        $this->app->bindShared('feed', function () {
+        $this->app->bindShared('feed', function () use ($config) {
             if (!$config) {
                 throw new \RunTimeException('Feed Parser configuration not found.');
             }
             return new FeedFactory($config);
         });
+        class_alias('ArandiLopez\Feed\Facades\Feed', 'Feed');
     }
 }

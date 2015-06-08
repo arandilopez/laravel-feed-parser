@@ -8,11 +8,11 @@ You can install this package with [composer](http://getcomposer.org) by typing i
 
 ```json
 "require": {
-  "arandilopez/laravel-feed-parser": "dev-master"
+  "arandilopez/laravel-feed-parser": "0.1.*"
 }
 ```
 ## Configuration
-### Laravel 5
+### Laravel 5 (Pending Test)
 Register the `FeedServiceProvider` in your `providers` array in `config/app.php` in [Laravel 5](http://laravel.com)
 
 ```php
@@ -24,17 +24,35 @@ Register the `FeedServiceProvider` in your `providers` array in `config/app.php`
 ```
 
 ### Lumen
-Register the `FeedServiceProvider` and `Feed` Facade in your `bootstrap/app.php` in [Lumen](http://lumen.laravel.com)
+Register the `LumenFeedServiceProvider` in your `bootstrap/app.php` in [Lumen](http://lumen.laravel.com)
 
 ```php
-// ...
-$app->register('ArandiLopez\Feed\Providers\FeedServiceProvider');
-
-class_alias('Feed', 'Arandi\Feed\Facades\Feed');
+// $app->register('App\Providers\AppServiceProvider');
+$app->register('ArandiLopez\Feed\Providers\LumenFeedServiceProvider');
 
 ```
 
+### Environment Configuration
+Laravel and Lumen use `.env` files for their configuration. To change defaults configuration of Feed Parser add this environment variables in your `.env` file:
+
+- FEED_CACHE_LIFE (Set cache lifetime. Expects an integer. Defaults 3600).
+- FEED_CACHE_ENABLED (Enable cache. Expects a boolean. Defaults true).
+
 ## Usage
+
+### Quick Lumen example
+```php
+
+$app->get('/feed', function() {
+  $myFeed = Feed::make('http://arandilopez.me/feed.xml');
+
+  return response()->json($myFeed);
+});
+
+```
+> Check SimplePie's configuration and Docs at [simplepie.org/wiki/](http://simplepie.org/wiki/)
 
 ## Contributing
 Yes, please.
+
+Any questions, errors or feature suggestions [are welcome in the issues](https://github.com/arandilopez/laravel-feed-parser/issues/new)

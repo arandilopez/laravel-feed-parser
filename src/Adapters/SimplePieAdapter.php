@@ -67,7 +67,11 @@ class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Array
     //
     public function getAuthor()
     {
-        return new Author( $this->feeder->get_author() );
+        if($author = $this->feeder->get_author()){
+            return new Author( $author );
+        }
+
+        return '';
     }
     //
     public function getAuthors()
@@ -121,21 +125,16 @@ class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Array
         return json_encode($this->toArray(), $option);
     }
 
+    /**
+     * Only return items
+     * 
+     * @return Array $items
+     */
     public function toArray()
     {
-        return [
-            'title'         => $this->feeder->get_title(),
-            'author'        => $this->author->toArray(),
-            'authors'       => array_map(function ($author) {
-                                return $author->toArray();
-                                }, $this->authors),
-            'permalink'     => $this->permalink,
-            'links'         => $this->links,
-            'description'   => $this->description,
-            'items'         => array_map(function ($item) {
-                                return $item->toArray();
-                                }, $this->items),
-        ];
+        return array_map(function ($item) {
+                    return $item->toArray();
+                }, $this->items);
     }
 
     /**

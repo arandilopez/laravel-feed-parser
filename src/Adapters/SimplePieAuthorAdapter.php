@@ -50,12 +50,16 @@ class SimplePieAuthorAdapter implements JsonSerializable, Jsonable, ArrayAccess,
         return $this->toArray();
     }
 
+    /**
+     * This only return authors names.
+     * Tries to prevents errors in json parsing
+     *
+     * @return [type]
+     */
     public function toArray()
     {
         return [
             'name'  => $this->name,
-            'link'  => $this->link,
-            'email' => $this->email
         ];
     }
 

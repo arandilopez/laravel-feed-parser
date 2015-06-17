@@ -39,7 +39,10 @@ class SimplePieItemAdapter implements JsonSerializable, Jsonable, ArrayAccess, A
 
     public function getAuthor()
     {
-        return new Author( $this->item->get_author() );
+        if( $author = $this->item->get_author()){
+            return new Author( $author );
+        }
+        return null;
     }
 
     public function getAuthors()
@@ -61,20 +64,22 @@ class SimplePieItemAdapter implements JsonSerializable, Jsonable, ArrayAccess, A
         return $this->toArray();
     }
 
+    /**
+     * Return basic item data. Authors in array
+     * @method toArray
+     * @return [type]
+     */
     public function toArray()
     {
         return [
             'title'         => $this->title,
             'description'   => $this->description,
             'content'       => $this->content,
-            'author'        => $this->author->toArray(),
             'authors'       => array_map(function ($author) {
-                                return $author->toArray();
-                            }, $this->authors),
+                                            return $author->toArray();
+                                        }, $this->authors),
             'date'          => $this->date,
-            'updated_date'  => $this->updatedDate,
             'permalink'     => $this->permalink,
-            'links'         => $this->links
         ];
     }
 

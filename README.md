@@ -12,23 +12,23 @@ You can install this package with [composer](http://getcomposer.org) by typing i
 }
 ```
 ## Configuration
-### Laravel 5 (Pending Test)
-Register the `FeedServiceProvider` in your `providers` array in `config/app.php` in [Laravel 5](http://laravel.com)
+### Laravel 5.1 (Pending Test)
+Register the `FeedServiceProvider` in your `providers` array in `config/app.php` in [Laravel 5.1](http://laravel.com)
 
 ```php
 'providers' => [
   // ...
 
-  'ArandiLopez\Feed\Providers\FeedServiceProvider',
+  ArandiLopez\Feed\Providers\FeedServiceProvider::class,
 ],
 ```
 
-### Lumen
-Register the `LumenFeedServiceProvider` in your `bootstrap/app.php` in [Lumen](http://lumen.laravel.com)
+### Lumen 5.1
+Register the `LumenFeedServiceProvider` in your `bootstrap/app.php` in [Lumen 5.1](http://lumen.laravel.com)
 
 ```php
-// $app->register('App\Providers\AppServiceProvider');
-$app->register('ArandiLopez\Feed\Providers\LumenFeedServiceProvider');
+// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(ArandiLopez\Feed\Providers\LumenFeedServiceProvider::class);
 
 ```
 
@@ -37,6 +37,8 @@ Laravel and Lumen use `.env` files for their configuration. To change defaults c
 
 - FEED_CACHE_LIFE (Set cache lifetime. Expects an integer. Defaults 3600).
 - FEED_CACHE_ENABLED (Enable cache. Expects a boolean. Defaults true).
+
+> Cache location is set default to storage laravel path
 
 ## Usage
 
@@ -55,4 +57,4 @@ $app->get('/feed', function() {
 ## Contributing
 Yes, please.
 
-Any questions, errors or feature suggestions [are welcome in the issues](https://github.com/arandilopez/laravel-feed-parser/issues/new)
+Any feedback, errors or features suggestions [are welcome in the issues](https://github.com/arandilopez/laravel-feed-parser/issues/new)

@@ -15,6 +15,6 @@ class LumenFeedServiceProvider extends FeedServiceProvider {
             }
             return new FeedFactory($config);
         });
-        class_alias('ArandiLopez\Feed\Facades\Feed', 'Feed');
+        // class_alias('ArandiLopez\Feed\Facades\Feed', 'Feed');
     }
 }

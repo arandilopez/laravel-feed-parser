@@ -1,20 +1,21 @@
-<?php namespace ArandiLopez\Feed\Adapters;
+<?php
+
+namespace ArandiLopez\Feed\Adapters;
 
 use SimplePie;
 use Illuminate\Support\Str;
 use ArandiLopez\Feed\Adapters\SimplePieItemAdapter as Item;
 use ArandiLopez\Feed\Adapters\SimplePieAuthorAdapter as Author;
-
 use JsonSerializable;
 use ArrayAccess;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Arrayable;
 
-class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Arrayable {
-
+class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Arrayable
+{
     protected $feeder;
 
-    function __construct()
+    public function __construct()
     {
         $this->feeder = new SimplePie();
     }
@@ -31,19 +32,20 @@ class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Array
 
     public function __get($attribute)
     {
-        if( $attribute === 'items' ) {
+        if ($attribute === 'items') {
             return $this->getItems();
         }
 
-        if ( $attribute === 'author' ) {
+        if ($attribute === 'author') {
             return $this->getAuthor();
         }
 
-        if ( $attribute === 'authors' ) {
+        if ($attribute === 'authors') {
             return $this->getAuthors();
         }
         $attr = Str::snake($attribute);
         $method = 'get_'.$attr;
+
         return $this->feeder->$method();
     }
 
@@ -67,8 +69,8 @@ class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Array
     //
     public function getAuthor()
     {
-        if($author = $this->feeder->get_author()){
-            return new Author( $author );
+        if ($author = $this->feeder->get_author()) {
+            return new Author($author);
         }
 
         return '';
@@ -90,6 +92,7 @@ class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Array
         foreach ($this->feeder->get_items() as $item) {
             array_push($items, new Item($item));
         }
+
         return $items;
     }
 
@@ -98,21 +101,28 @@ class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Array
         $this->feeder->set_feed_url($url);
     }
 
-    public function setTimeout( int $timeout )
+    public function setTimeout(int $timeout)
     {
         $this->feeder->set_timeout($timeout);
     }
 
-    public function loadConfig( array $config )
+    public function loadConfig(array $config)
     {
-        if( isset($config['cache.location']) )
+        if (isset($config['cache.location'])) {
             $this->feeder->set_cache_location($config['cache.location']);
+        }
 
-        if( isset($config['cache.life']) )
+        if (isset($config['cache.life'])) {
             $this->feeder->set_cache_duration($config['cache.life']);
+        }
 
-        if( isset($config['cache.enabled']) )
+        if (isset($config['cache.enabled'])) {
             $this->feeder->enable_cache($config['cache.enabled']);
+        }
+
+        if (isset($config['item_limit'])) {
+            $this->feeder->set_item_limit($config['item_limit']);
+        }
     }
 
     public function jsonSerialize()
@@ -126,8 +136,8 @@ class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Array
     }
 
     /**
-     * Only return items
-     * 
+     * Only return items.
+     *
      * @return Array $items
      */
     public function toArray()
@@ -140,7 +150,8 @@ class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Array
     /**
      * Determine if the given attribute exists.
      *
-     * @param  mixed  $offset
+     * @param mixed $offset
+     *
      * @return bool
      */
     public function offsetExists($offset)
@@ -151,7 +162,8 @@ class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Array
     /**
      * Get the value for a given offset.
      *
-     * @param  mixed  $offset
+     * @param mixed $offset
+     *
      * @return mixed
      */
     public function offsetGet($offset)
@@ -162,9 +174,8 @@ class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Array
     /**
      * Set the value for a given offset.
      *
-     * @param  mixed  $offset
-     * @param  mixed  $value
-     * @return void
+     * @param mixed $offset
+     * @param mixed $value
      */
     public function offsetSet($offset, $value)
     {
@@ -174,12 +185,10 @@ class SimplePieAdapter implements JsonSerializable, Jsonable, ArrayAccess, Array
     /**
      * Unset the value for a given offset.
      *
-     * @param  mixed  $offset
-     * @return void
+     * @param mixed $offset
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
 }

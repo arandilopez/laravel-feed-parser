@@ -58,6 +58,15 @@ $app->get('/feed', function() {
 });
 
 ```
+You can get the whole SimplePie instance by doing:
+```php
+$myFeed = Feed::make('http://arandilopez.me/feed.xml');
+$simplePieInstance = $myFeed->getRawFeederObject();
+
+// do configs and whatever with the instance 
+
+```
+
 > Check SimplePie's configuration and Docs at [simplepie.org/wiki/](http://simplepie.org/wiki/)
 
 ## Contributing

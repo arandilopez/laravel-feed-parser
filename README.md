@@ -31,7 +31,13 @@ Register the `LumenFeedServiceProvider` in your `bootstrap/app.php` in [Lumen 5.
 $app->register(ArandiLopez\Feed\Providers\LumenFeedServiceProvider::class);
 
 ```
+In order to use the Facade `Feed` you have to uncomment this line:
 
+```php
+
+$app->withFacades();
+
+```
 ### Environment Configuration
 Laravel and Lumen use `.env` files for their configuration. To change defaults configuration of Feed Parser add this environment variables in your `.env` file:
 

@@ -21,7 +21,7 @@ class FeedServiceProvider extends ServiceProvider {
 
     protected function registerFeedFactory()
     {
-        $this->app->bindShared('feed', function () {
+        $this->app->singleton('feed', function () {
             $config = config('feed');
             if (!$config) {
                 throw new \RunTimeException('Feed Parser configuration not found. Please run `php artisan vendor:publish`');

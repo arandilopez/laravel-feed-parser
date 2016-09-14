@@ -77,7 +77,7 @@ class SimplePieItemAdapter implements JsonSerializable, Jsonable, ArrayAccess, A
             'content'       => $this->content,
             'authors'       => array_map(function ($author) {
                                             return $author->toArray();
-                                        }, $this->authors),
+                                        }, isset($this->authors) ? $this->authors : []),
             'date'          => $this->date,
             'permalink'     => $this->permalink,
         ];
